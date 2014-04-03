@@ -32,16 +32,15 @@ RUN bash -c /install_rvm.sh stable --ruby
 RUN echo '[ -s "$HOME/.rvm/scripts/rvm" ] && . "$HOME/.rvm/scripts/rvm"' >> ~/.bashrc
 RUN echo 'export PATH=/usr/local/rvm/bin:$PATH' >> ~/.bashrc
 RUN cat ~/.bashrc
-RUN . ~/.bashrc; echo $?
 
 ## ENV PATH /usr/local/rvm/bin:$PATH
 
 RUN echo $PATH
 RUN echo "ENV=";env
-RUN . ~/.bashrc; rvm list known
-RUN . ~/.bashrc; rvm get stable
-RUN . ~/.bashrc; rvm install ruby-2.1.0
-RUN . ~/.bashrc; rvm use ruby-2.1.0
+RUN bash -lc "rvm list known"
+RUN bash -lc "rvm get stable"
+RUN bash -lc "rvm install ruby-2.1.0"
+RUN bash -lc "rvm use ruby-2.1.0"
 # BETTER:
 #RUN rvm install ruby-2.1.1
 #RUN rvm use ruby-2.1.1
@@ -63,7 +62,7 @@ RUN . ~rails/.bashrc; echo $?
 RUN echo PATH="$PATH"
 
 #RUN . ~/.bashrc; echo $?; gem install rails
-RUN . ~/.bashrc; echo $?; /usr/local/rvm/rubies/ruby-2.1.0/bin/gem install rails
+RUN bash -lc "   echo $?; /usr/local/rvm/rubies/ruby-2.1.0/bin/gem install rails"
 
 ##############################################################################
 # USER:
@@ -76,11 +75,11 @@ USER rails
 # RUN ENV A=1
 # RUN [ $A -eq 1 ] && exit 1
 
-RUN .~/.bashrc; rvm all do ruby --version
+RUN bash -lc "rvm all do ruby --version"
 
 #ENV PATH /usr/local/rvm/rubies/ruby-2.1.0/bin:$PATH
-RUN . ~/.bashrc; echo $?; gem install rails
-RUN . ~/.bashrc; rails -v
+RUN bash -lc "gem install rails"
+RUN bash -lc "rails -v"
 RUN rails -v
 
 #RUN mkdir -p /py_wsgi
