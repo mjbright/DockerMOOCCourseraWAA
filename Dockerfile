@@ -9,7 +9,10 @@ ADD .bashrc /root/.bashrc
 CMD bash
 
 # Install packages
-#RUN DEBIAN_FRONTEND=noninteractive apt-get -y install curl
+RUN DEBIAN_FRONTEND=noninteractive apt-get -y install openssh-server
+#RUN mkdir /var/run/sshd 
+RUN /etc/init.d/ssh start
+
 RUN DEBIAN_FRONTEND=noninteractive apt-get -y install tar build-essential curl git-core
 
 # Add Python stuff
@@ -36,6 +39,11 @@ RUN bash -lc "rvm all do ruby --version"
 RUN bash -lc "gem install rails"
 RUN bash -lc "rails -v"
 
+RUN adduser --gecos "" --ingroup rvm --disabled-password user
+ADD .bashrc /home/user/.bashrc
+RUN echo 'user:user' |chpasswd
+
+EXPOSE 22
 EXPOSE 3000
 
 
