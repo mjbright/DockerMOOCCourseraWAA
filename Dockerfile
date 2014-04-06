@@ -9,9 +9,9 @@ ADD .bashrc /root/.bashrc
 CMD bash
 
 # Install packages
+RUN mkdir -p /var/run/sshd 
+RUN chmod 7555 /var/run/sshd 
 RUN DEBIAN_FRONTEND=noninteractive apt-get -y install openssh-server
-#RUN mkdir /var/run/sshd 
-RUN /etc/init.d/ssh start
 
 RUN DEBIAN_FRONTEND=noninteractive apt-get -y install tar build-essential curl git-core
 
@@ -43,7 +43,12 @@ RUN adduser --gecos "" --ingroup rvm --disabled-password user
 ADD .bashrc /home/user/.bashrc
 RUN echo 'user:user' |chpasswd
 
+RUN chmod 755 /usr/local/rvm/bin
+RUN chmod 755 /usr/local/rvm/gems
+
 EXPOSE 22
 EXPOSE 3000
+
+#ENTRYPOINT /etc/init.d/ssh start
 
 
