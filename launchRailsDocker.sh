@@ -9,8 +9,11 @@ CMD="/etc/init.d/ssh start; mkdir app1; rails new app1; cd app1; rails server"
 CMD="/etc/init.d/ssh start; bash"
 [ ! -z "$1" ] && CMD="$1"
 
-#MOUNT="-v /home/user:/home/mjb/DOCKER/WAA"
-MOUNT="-v /home/mjb/DOCKER/WAA:/home/user"
+#MOUNT="-v /home/user:$HOME/DOCKER/WAA"
+DIR="$HOME/WebAppArch"
+[ ! -d $DIR ] && mkdir -p $DIR
+
+MOUNT="-v $DIR:/home/user"
 SSH_PORT=2222
 PORTS="-p $SSH_PORT:22 -p 3000:3000"
 
