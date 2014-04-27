@@ -1,6 +1,6 @@
 
 TAG=mjbright/docker-mooc-coursera-waa
-TAG=my/mooc
+TAG=mine/mooc
 
 cd /home/mjb/src/git/mjbright/DockerMOOCCourseraWAA
 

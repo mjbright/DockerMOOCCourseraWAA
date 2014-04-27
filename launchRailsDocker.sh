@@ -1,6 +1,6 @@
 
 TAG=mjbright/docker-mooc-coursera-waa
-TAG=my/mooc
+TAG=mine/mooc
 
 
 CMD="rvm rails console"
