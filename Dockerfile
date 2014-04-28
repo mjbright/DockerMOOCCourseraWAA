@@ -46,6 +46,10 @@ RUN echo 'user:user' |chpasswd
 RUN chmod 755 /usr/local/rvm/bin
 RUN chmod 755 /usr/local/rvm/gems
 
+# Fix for ssh login issue: (Exit 254 immediately after successful authenticn)
+RUN sed -ri 's/UsePAM yes/#UsePAM yes/g' /etc/ssh/sshd_config
+RUN sed -ri 's/#UsePAM no/UsePAM no/g' /etc/ssh/sshd_config
+
 EXPOSE 22
 EXPOSE 3000
 

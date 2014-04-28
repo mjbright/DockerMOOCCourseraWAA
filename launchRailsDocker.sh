@@ -6,7 +6,7 @@ TAG=mine/mooc
 CMD="rvm rails console"
 CMD="mkdir -p /var/run/sshd/;chmod 755 /var/run/sshd/; /etc/init.d/ssh start; mkdir app1; rails new app1; cd app1; rails server"
 CMD="/etc/init.d/ssh start; mkdir app1; rails new app1; cd app1; rails server"
-CMD="/etc/init.d/ssh start; bash"
+CMD="/etc/init.d/ssh restart; bash"
 [ ! -z "$1" ] && CMD="$1"
 
 #MOUNT="-v /home/user:$HOME/DOCKER/WAA"
@@ -23,9 +23,9 @@ echo "Rails listening on port 3000"
 echo
 echo "You may want to change the ssh 'user' password"
 echo
-echo "docker run -i -t $PORTS $MOUNT $TAG bash -lc "$CMD""
-exit 0
-set -x
+#echo "docker run -i -t $PORTS $MOUNT $TAG bash -lc "$CMD""
+#exit 0
+#set -x
 docker run -i -t $PORTS $MOUNT $TAG bash -lc "$CMD"
 
 
