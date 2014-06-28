@@ -8,7 +8,8 @@ set -o vi
 
 export PATH=/usr/local/rvm/bin:$PATH
 
-#export PATH=/usr/local/rvm/rubies/ruby-2.1.0/bin:$PATH
+export PATH=/usr/local/rvm/rubies/ruby-2.1.0/bin:$PATH
+export PATH=/usr/local/rvm/gems/ruby-2.1.0/wrappers:$PATH
 #/usr/local/rvm/rubies/ruby-2.1.0/bin/gem install rails"
 
 echo PATH=$PATH
